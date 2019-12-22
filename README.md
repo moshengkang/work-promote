@@ -1,2 +1,2 @@
-# work-promote-new-
+# work-promote-new
 提升自我技能
