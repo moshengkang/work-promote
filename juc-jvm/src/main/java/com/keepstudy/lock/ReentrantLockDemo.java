@@ -8,7 +8,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @Author: moshengkang
  * @e-mial: 1634414600@qq.com
  * @Version: 1.0
- * @Description: 可重入锁
+ * @Description: 可重入锁，也即是说，线程可以进入任何一个它已经拥有的锁所同步着的代码块；最大作用是避免死锁
+ * 默认是非公平锁，非公平锁比公平锁吞吐量大
  */
 class Phone implements Runnable {
     public synchronized void method1(){
