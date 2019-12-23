@@ -43,7 +43,7 @@ class MyCache{
             //模拟网络延时
             try {TimeUnit.MICROSECONDS.sleep(300);} catch (InterruptedException e) {e.printStackTrace();}
             map.put(key,value);
-            System.out.println(Thread.currentThread().getName()+"\t正在完成");
+            System.out.println(Thread.currentThread().getName()+"\t写入正在完成");
         } finally {
             reentrantReadWriteLock.writeLock().unlock();
         }
@@ -60,7 +60,7 @@ class MyCache{
             //模拟网络延时
             try {TimeUnit.MICROSECONDS.sleep(300);} catch (InterruptedException e) {e.printStackTrace();}
             Object value = map.get(key);
-            System.out.println(Thread.currentThread().getName()+"\t正在完成"+value);
+            System.out.println(Thread.currentThread().getName()+"\t读取正在完成"+value);
         } finally {
             reentrantReadWriteLock.readLock().unlock();
         }
