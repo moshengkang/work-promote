@@ -32,7 +32,10 @@ public class SaleTicket {
     public static void main(String[] args) {
         Ticket ticket = new Ticket();
 
-        new Thread(new Runnable() {
+        new Thread(() -> {for (int i = 0; i < 40; i++) {ticket.sale();}},"A").start();
+        new Thread(() -> {for (int i = 0; i < 40; i++) {ticket.sale();}},"B").start();
+        new Thread(() -> {for (int i = 0; i < 40; i++) {ticket.sale();}},"C").start();
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 40; i++) {
@@ -55,6 +58,6 @@ public class SaleTicket {
                     ticket.sale();
                 }
             }
-        },"C").start();
+        },"C").start();*/
     }
 }
