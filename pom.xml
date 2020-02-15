@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>juc-jvm</module>
+        <module>juc-study</module>
     </modules>
 
     <properties>
