@@ -33,6 +33,8 @@ class Aricondition {
             number++;
             System.out.println(Thread.currentThread().getName()+"\t"+number);
             condition.signalAll();//this.notifyAll();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             lock.unlock();
         }
@@ -47,6 +49,8 @@ class Aricondition {
             number--;
             System.out.println(Thread.currentThread().getName()+"\t"+number);
             condition.signalAll();//this.notifyAll();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             lock.unlock();
         }
