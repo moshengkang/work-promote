@@ -11,6 +11,7 @@
     <modules>
         <module>juc-jvm</module>
         <module>juc-study</module>
+        <module>jvm-study</module>
     </modules>
 
     <properties>
