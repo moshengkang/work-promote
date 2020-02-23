@@ -19,7 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 知识小总结 = 多线程编程套路+while判断+新版写法
  */
 
-class Aricondition {
+class Aircondition {
     private int number = 0;
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
@@ -79,13 +79,13 @@ class Aricondition {
 
 public class ProdConsumerDemo {
     public static void main(String[] args) {
-        Aricondition aricondition = new Aricondition();
+        Aircondition aircondition = new Aircondition();
 
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(200);
-                    aricondition.increment();
+                    aircondition.increment();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -96,7 +96,7 @@ public class ProdConsumerDemo {
             for (int i = 0; i <10; i++) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(300);
-                    aricondition.decrement();
+                    aircondition.decrement();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -107,7 +107,7 @@ public class ProdConsumerDemo {
             for (int i = 0; i < 10; i++) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(400);
-                    aricondition.increment();
+                    aircondition.increment();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -118,7 +118,7 @@ public class ProdConsumerDemo {
             for (int i = 0; i <10; i++) {
                 try {
                     TimeUnit.MILLISECONDS.sleep(500);
-                    aricondition.decrement();
+                    aircondition.decrement();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
