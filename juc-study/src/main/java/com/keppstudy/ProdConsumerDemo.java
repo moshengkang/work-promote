@@ -1,5 +1,10 @@
 package com.keppstudy;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * @Author: moshengkang
  * @e-mial: 1634414600@qq.com
@@ -16,25 +21,56 @@ package com.keppstudy;
 
 class Aricondition {
     private int number = 0;
+    private Lock lock = new ReentrantLock();
+    private Condition condition = lock.newCondition();
 
-    public synchronized void increment() throws Exception{
-        //使用if会出现虚假唤醒
-        while (number != 0){
-            this.wait();
+    public void increment() throws  Exception{
+        lock.lock();
+        try {
+            while (number != 0){
+                condition.await();//this.wait();
+            }
+            number++;
+            System.out.println(Thread.currentThread().getName()+"\t"+number);
+            condition.signalAll();//this.notifyAll();
+        } finally {
+            lock.unlock();
         }
-        number++;
-        System.out.println(Thread.currentThread().getName()+"\t"+number);
-        this.notifyAll();
     }
 
-    public synchronized void decrement() throws Exception{
-        while (0 == number) {
-            this.wait();
+    public void decrement() throws Exception {
+        lock.lock();
+        try {
+            while (0 == number) {
+                condition.await();//this.wait();
+            }
+            number--;
+            System.out.println(Thread.currentThread().getName()+"\t"+number);
+            condition.signalAll();//this.notifyAll();
+        } finally {
+            lock.unlock();
         }
-        number--;
-        System.out.println(Thread.currentThread().getName()+"\t"+number);
-        this.notifyAll();
     }
+
+//传统版
+//    public synchronized void increment() throws Exception{
+//        //使用if会出现虚假唤醒
+//        while (number != 0){
+//            this.wait();
+//        }
+//        number++;
+//        System.out.println(Thread.currentThread().getName()+"\t"+number);
+//        this.notifyAll();
+//    }
+
+//    public synchronized void decrement() throws Exception{
+//        while (0 == number) {
+//            this.wait();
+//        }
+//        number--;
+//        System.out.println(Thread.currentThread().getName()+"\t"+number);
+//        this.notifyAll();
+//    }
 }
 
 public class ProdConsumerDemo {
@@ -44,6 +80,7 @@ public class ProdConsumerDemo {
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
+                    TimeUnit.MILLISECONDS.sleep(200);
                     aricondition.increment();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,6 +91,7 @@ public class ProdConsumerDemo {
         new Thread(() -> {
             for (int i = 0; i <10; i++) {
                 try {
+                    TimeUnit.MILLISECONDS.sleep(300);
                     aricondition.decrement();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -64,6 +102,7 @@ public class ProdConsumerDemo {
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
+                    TimeUnit.MILLISECONDS.sleep(400);
                     aricondition.increment();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -74,6 +113,7 @@ public class ProdConsumerDemo {
         new Thread(() -> {
             for (int i = 0; i <10; i++) {
                 try {
+                    TimeUnit.MILLISECONDS.sleep(500);
                     aricondition.decrement();
                 } catch (Exception e) {
                     e.printStackTrace();
