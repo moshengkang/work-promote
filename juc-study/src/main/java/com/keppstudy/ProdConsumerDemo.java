@@ -24,7 +24,7 @@ class Aricondition {
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
 
-    public void increment() throws  Exception{
+    public void increment() {
         lock.lock();
         try {
             while (number != 0){
@@ -40,7 +40,7 @@ class Aricondition {
         }
     }
 
-    public void decrement() throws Exception {
+    public void decrement() {
         lock.lock();
         try {
             while (0 == number) {
