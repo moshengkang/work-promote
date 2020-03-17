@@ -29,15 +29,15 @@ class MyResource{
      * @throws Exception
      */
     public void myProduce() throws Exception {
-        String date= null;
+        String data= null;
         boolean returnValue;
         while (flag){
-            date = atomicInteger.incrementAndGet()+"";
-            returnValue = blockingQueue.offer(date,2l, TimeUnit.SECONDS);
+            data = atomicInteger.incrementAndGet()+"";
+            returnValue = blockingQueue.offer(data,2l, TimeUnit.SECONDS);
             if (returnValue){
-                System.out.println(Thread.currentThread().getName()+"\t 插入队列数据,data="+date+"成功");
+                System.out.println(Thread.currentThread().getName()+"\t 插入队列数据,data="+data+"成功");
             }else {
-                System.out.println(Thread.currentThread().getName()+"\t 插入队列数据,data="+date+"失败");
+                System.out.println(Thread.currentThread().getName()+"\t 插入队列数据,data="+data+"失败");
             }
             TimeUnit.SECONDS.sleep(1);
         }
