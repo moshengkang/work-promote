@@ -12,6 +12,7 @@
         <module>juc-jvm</module>
         <module>juc-study</module>
         <module>jvm-study</module>
+        <module>itcast-jvm</module>
     </modules>
 
     <properties>
